@@ -1,0 +1,152 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Math.jack
+
+/**
+ * A library of commonly used mathematical functions.
+ * Note: Jack compilers implement multiplication and division using OS method calls.
+ */
+class Math {
+
+    /** Initializes the library. */
+    function void init() {
+    }
+    
+    /** Returns the absolute value of x. */
+    function int abs(int x) {
+        if (x <0 ){
+            return x * (-1);
+        }else{
+            return x;
+        }
+    }
+
+    /** Returns the product of x and y. 
+     *  When a Jack compiler detects the multiplication operator '*' in the 
+     *  program's code, it handles it by invoking this method. In other words,
+     *  the Jack expressions x*y and multiply(x,y) return the same value.
+     */
+    function int multiply(int x, int y) {
+        var int i,sum,sign;
+        if ( x<0 & y<0 ){
+            let sign = 1; 
+        }
+        if ( x<0 & y>0 ){
+            let sign = -1; 
+        }
+        if ( x>0 & y<0 ){
+            let sign = -1; 
+        }
+        if ( x>0 & y>0 ){
+            let sign = 1; 
+        }
+        
+        let x = Math.abs(x)
+        let y = Math.abs(y)
+        
+        let i = 0;
+        while (i < y){
+            do sum = sum + x;  
+        }
+        return sum*sign;
+    }
+
+    /** Returns the integer part of x/y.
+     *  When a Jack compiler detects the multiplication operator '/' in the 
+     *  program's code, it handles it by invoking this method. In other words,
+     *  the Jack expressions x/y and divide(x,y) return the same value.
+     */
+    function int divide_help(int x, int y) {
+        var int q,sign;
+        
+        let x = Math.abs(x)
+        let y = Math.abs(y)
+        if (y>x | y<0){
+            return 0;
+        }
+        let q = Main.divide_help(x ,2*y );
+        if ( (x-(2*q*y)) < y){
+            return 2 * q;
+        }else{
+            return 2 * q+1;
+        }
+    }
+    function int divide(int x, int y) {
+        var int sign;
+        if ( x<0 & y<0 ){
+            let sign = 1; 
+            return Main.divide_help(Math.abs(x),Math.abs(y)) * sign;
+        }
+        if ( x<0 & y>0 ){
+            let sign = -1; 
+            return Main.divide_help(Math.abs(x),Math.abs(y)) * sign;
+        }
+        if ( x>0 & y<0 ){
+            let sign = -1; 
+            return Main.divide_help(Math.abs(x),Math.abs(y)) * sign;
+        }
+        if ( x>0 & y>0 ){
+            let sign = 1; 
+            return Main.divide_help(Math.abs(x),Math.abs(y)) * sign;
+        }
+    }
+    /** Returns the integer part of the square root of x. */
+    function int sqrt(int x) {
+
+        
+    }
+
+    /** Returns the greater number. */
+    function int max(int a, int b) {        
+        if ( a<0 & b<0 ){if ((a-b) > 0){return a;}else{return b;}}
+        if ( a<0 & b>0 ){return b;}
+        if ( a>0 & b<0 ){return a; }
+        if ( a>0 & b>0 ){if ((a-b) > 0){return a;}else{return b;}}
+       }
+    
+
+    /** Returns the smaller number. */
+    function int min(int a, int b) {
+        if ( a<0 & b<0 ){if ((a-b) < 0){return a;}else{return b;}}
+        if ( a<0 & b>0 ){return a;}
+        if ( a>0 & b<0 ){return b; }
+        if ( a>0 & b>0 ){if ((a-b) < 0){return a;}else{return b;}}
+       }
+    
+}
+// keyboard test
+
+function char keyPressed() {
+        return Math.peek(24576);
+    }
+    function char readChar() {
+        var int c , kp;
+            
+            let kp = Math.keyPressed();
+
+            while(kp=0){
+                let kp = Math.keyPressed();
+            }
+            let c = kp;
+            while(~(kp=0)){
+                let kp = Math.keyPressed();
+            }
+            return c;
+    }
+    function String readLine() {
+        var int str,check,c;
+        let str = 0;
+        let check=0;
+        while (check=0){
+        let c = Math.readChar();
+        if (c=128){
+            return str;
+        }
+        if(c=129){
+            // do outputbackspace;
+            return;
+        }
+        do Math.printChar(c);
+        }
+    }

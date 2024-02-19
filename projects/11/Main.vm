@@ -1,0 +1,167 @@
+class Math {
+    static Array ram,heap,SizeHeap,baseScreen; 
+    /** Returns the absolute value of x. */
+    function int abs(int x) {
+        if (x <0 ){
+            return -x;
+        }else{
+            return x;
+        }
+    }
+    function int Mod(int x,int y){
+        var int div,rem;
+        let div=0;
+        let rem=x;
+        while( (rem>y)|(rem=y)){
+            let rem= rem -y;
+            let div = div + 1;
+        }
+        return rem;
+    }
+    function int divide(int x, int y) {
+        var int div,rem;
+        let div=0;
+        let rem=x;
+        while( (rem>y)|(rem=y)){
+            let rem= rem -y;
+            let div = div + 1;
+        }
+        return div;
+    }
+
+    function int multiply(int x, int y) {
+        var int i,sum,sign;
+        if ( (x<0) & (y<0) ){
+            let sign = 1; 
+        }
+        if ( (x<0) & (y>0) ){
+            let sign = -1; 
+        }
+        if ( (x>0) & (y<0) ){
+            let sign = -1; 
+        }
+        if ( (x>0) & (y>0) ){
+            let sign = 1; 
+        }
+        
+        let x = Math.abs(x);
+        let y = Math.abs(y);
+        
+        let i = 0;
+        let sum=0;
+        while (i < y){
+            let sum = sum + x; 
+            let i=i+1; 
+        }
+        if (sign = 1){
+            return sum;
+        }else{
+            return -sum;
+        }
+    }
+    function void init() {
+        let ram = 0;
+        let heap=0;
+        let SizeHeap=14334;
+        let heap[2048]=SizeHeap;
+        let heap[2049]=2050;
+        let baseScreen=16384;
+        return;  
+    }
+
+    /** Returns the RAM value at the given address. */
+    function int peek(int address) {
+        return ram[address]; 
+    } 
+    /** Sets the RAM value at the given address to the given value. */
+    function void poke(int address, int value) {
+        let ram[address]= value; 
+        return;
+    }
+
+    function void drawPixel(int x, int y) {
+        var int address,value,bit;
+        do Math.init();
+        let address = (32*y) + (x/16) + baseScreen;
+        let value= Math.peek(address);
+        let bit = Math.Mod(x,16);
+        //do Output.printInt(bit);
+        //do Output.printInt(value);
+        if (bit=7){let value=value+ 128;do Math.poke(address,value);return;}
+        if (bit=8){let value=value+ 256;do Math.poke(address,value);return;}
+        if (bit=9){let value=value+ 512;do Math.poke(address,value);return;}
+        if (bit=4){let value=value+ 16;do Math.poke(address,value);return;}
+        if (bit=5){let value=value+ 32;do Math.poke(address,value);return;}
+        if (bit=6){let value=value+ 64;do Math.poke(address,value);return;}
+        if (bit=10){let value=value+ 1024;do Math.poke(address,value);return;}
+        if (bit=11){let value=value+ 2048;do Math.poke(address,value);return;}
+        if (bit=12){let value=value+ 4096;do Math.poke(address,value);return;}
+        if (bit=13){let value=value+ 8192;do Math.poke(address,value);return;}
+        if (bit=0){let value=value+ 1;do Math.poke(address,value);return;}
+        if (bit=1){let value=value+ 2;do Math.poke(address,value);return;}
+        if (bit=2){let value=value+ 4;do Math.poke(address,value);return;}
+        if (bit=3){let value=value+ 8;do Math.poke(address,value);return;}
+        if (bit=14){let value=value+ 16384;do Math.poke(address,value);return;}
+        if (bit=15){let value=value- 32767-1;do Math.poke(address,value);return;}
+        return;
+}
+    function void drawLine(int x1, int y1, int x2, int y2) {
+            var int diff,diffY,diffX,a,b;
+            let diffX = x2-x1; 
+            let diffY = y2-y1;
+            let diff=0;
+            let a=0;
+            let b=0;
+        // handling Vertical line Case 1/6
+            if(diffX=0){    
+                if ( diffY > 0 ){
+                    while (diffY>0){
+                        do Math.drawPixel(x1,y1);
+                        let y1= y1+1;
+                        let diffY= diffY-1;
+                    }
+                    return;
+                }else{
+                    let diffY = diffY * -1;
+                    while (diffY>0){
+                        do Math.drawPixel(x1,y1);
+                        let y1= y1-1;
+                        let diffY= diffY-1;   
+                    }
+                } return;}
+        // handling Horizontal line Case 2/6    
+            if (diffY=0){
+                if ( diffX > 0 ){
+                    while (diffX>0){
+                        do Math.drawPixel(x1,y1);
+                        let x1= x1+1;
+                        let diffX= diffX-1;
+                    }
+                    return;
+                }else{
+                    let diffX = diffX * -1;
+                    while (diffX>0){
+                        do Math.drawPixel(x1,y1);
+                        let x1= x1-1;
+                        let diffX= diffY-1; 
+                    }
+                } return;}
+        // handling South East Case 3/6
+        
+        
+    }
+    function void drawRectangle(int x1, int y1, int x2, int y2) {
+        var int diffY,diffX;
+        let diffX = x2-x1;
+        let diffY = y2-y1;
+        
+        while(diffY>0){
+            do drawLine(x1,y1,x2,y1);
+            let y1=y1+1;
+            let diffY=diffY-1;
+        }
+        return;
+    }
+
+
+}

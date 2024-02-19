@@ -1,0 +1,114 @@
+class Linked_List {
+  
+  field int head;
+
+  constructor Linked_List new(){
+      let head =0;
+      return this;
+  }   
+  method void insert(int data){
+      var Node curr;
+
+      if (head=0){
+        let head = Node.new(data);
+        return;
+      }
+      let curr = head; 
+      while (~(curr.nextF()=0)){
+          let curr=curr.nextF();
+      }
+      do curr.nextS(Node.new(data));
+      return;
+  }  
+  method void print(){
+      var Node curr;
+      if (head=0){
+        do Output.printString("Null");
+        return;
+      }
+      let curr = head; 
+      while (~(curr.nextF()=0)){
+          do Output.printInt(curr.dataF());
+          do Output.printChar(45);
+          let curr=curr.nextF();
+      }
+      do Output.printInt(curr.dataF());
+      do Output.printChar(45);
+      do Output.printString("Null");
+      return;
+  }  
+  method int size(){
+      var Node curr;
+      var int currsize;
+      let currsize=1;
+      if (head=0){
+        return 0;
+      }
+      let curr = head; 
+      while (~(curr.nextF()=0)){
+          let currsize=currsize+1;
+          let curr=curr.nextF();
+      }
+      
+      return currsize;
+  }  
+  method void dispose() {
+
+      var Node curr,temp;
+
+      if (head=0){
+        do Memory.deAlloc(this);
+        return;
+      }
+      let curr = head; 
+      while (~(curr.nextF()=0)){
+          let temp =curr;
+          let curr=curr.nextF();
+          do temp.dispose();
+      }
+      do curr.dispose();
+      do Memory.deAlloc(this);
+      return;
+  }
+  method void pop(){
+    var Node curr,temp,prev;
+    
+      if (head=0){
+        return;
+      }
+      let curr = head;
+      let prev=curr;
+      if (curr.nextF()=0){do curr.dispose();let head =0;return;} 
+      while (~(curr.nextF()=0)){
+          let prev=curr;
+          let curr=curr.nextF();
+      }
+      do prev.nextS(0);
+      do curr.dispose();
+      return;
+  }
+  method String ChangetoString(){
+    var String s;
+    var Node curr;
+    var int currsize;
+    let currsize=1;
+      if (head=0){
+        let currsize=0;
+      }else{
+      let curr = head; 
+      while (~(curr.nextF()=0)){
+          let currsize=currsize+1;
+          let curr=curr.nextF();
+      }
+      }
+    if (currsize=0){return 0;}
+    let s=String.new(currsize);
+    let curr=head;
+    while(~(curr.nextF()=0)){
+       let s=s.appendChar(curr.dataF());
+       let curr=curr.nextF();
+    }
+    let s=s.appendChar(curr.dataF());
+    return s;
+  }
+}

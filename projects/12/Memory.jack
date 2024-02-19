@@ -1,0 +1,79 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * This library provides two services: direct access to the computer's main
+ * memory (RAM), and allocation and recycling of memory blocks. The Hack RAM
+ * consists of 32,768 words, each holding a 16-bit binary number.
+ */ 
+class Memory { 
+    static Array ram,heap,SizeHeap; 
+    function void init() {
+        let ram = 0;
+        let heap=0;
+        let SizeHeap=14334;
+        let heap[2048]=SizeHeap;
+        let heap[2049]=2050;
+        return;  
+    }
+
+    /** Returns the RAM value at the given address. */
+    function int peek(int address) {
+        return ram[address]; 
+    } 
+    /** Sets the RAM value at the given address to the given value. */
+    function void poke(int address, int value) {
+        let ram[address]= value; 
+        return;
+    }
+    /** Finds an available RAM block of the given size and returns
+     *  a reference to its base address. */
+    function int alloc(int size) {
+        var int block,check,tempsize,haaland;
+        // Implemtation for handling if size is either neg or zero;
+        if (size=0){return;} // sys error
+        let check=2048;
+        while (heap[check]<(size+2)){
+            let check = heap[check+1]; 
+        } 
+        let tempsize=heap[check]; 
+        let tempsize=tempsize-size-2;
+        let haaland= heap[check+1];
+        let heap[check]=0; // make the size 0
+        let block = check+2;
+        let heap[check+1]=block+size;
+        let heap[block+size]=tempsize;
+        if ((block+size+1) < haaland){
+            let heap[block+size+1]=haaland;
+            return block;
+        }else{
+            let heap[block+size+1]=block+size+2;
+            return block;
+    }
+    
+    }
+    /** De-allocates the given object (cast as an array) by making
+     *  it available for future allocations. */
+    function void deAlloc(Array o) {
+        var int size,tempsizedealloc;
+        let size=heap[o-1]- o; 
+        
+        if (~(heap[size+o]=0)){
+           let tempsizedealloc=heap[size+o] + size + 2;
+           let heap[o-2]= tempsizedealloc;
+           if( (heap[size+o+1]) - (size +o+ 1) = 1){
+                let heap[o-1] = o;
+           }else{
+                let heap[o-1] = heap[size+o+1];
+           }
+           return;
+        }else{
+            let heap[o-2]=size;
+            return;
+        }
+        return;
+        }
+
+}

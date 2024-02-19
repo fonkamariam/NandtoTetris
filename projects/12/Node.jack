@@ -1,0 +1,25 @@
+class Node {
+  
+  field int next,data;
+
+  constructor Node new(int dataArg){
+      let next=0;
+      let data=dataArg;
+      return this;
+  }
+  method int nextF(){
+    return next;
+  }
+  method int dataF(){
+    return data;
+  }
+  method void nextS(int next_value){
+    let next=next_value;
+    return;
+  }
+  method void dispose() {
+         
+        do Memory.deAlloc(this); 
+        return;
+    }
+}

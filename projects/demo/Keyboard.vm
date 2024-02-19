@@ -1,0 +1,335 @@
+function Keyboard.init 0
+push constant 24576
+pop static 0
+push constant 0
+return
+
+function Keyboard.keyPressed 0
+push static 0
+call Memory.peek 1
+return
+
+function Keyboard.readChar 2
+call Keyboard.keyPressed 0
+pop local 1
+label while(1)
+push local 1
+push constant 0
+eq
+not
+if-goto whileif(1)
+call Keyboard.keyPressed 0
+pop local 1
+goto while(1)
+label whileif(1)
+push local 1
+pop local 0
+label while(2)
+push local 1
+push constant 0
+eq
+not
+not
+if-goto whileif(2)
+call Keyboard.keyPressed 0
+pop local 1
+goto while(2)
+label whileif(2)
+push local 0
+push constant 128
+eq
+not
+if-goto if(1)
+push local 0
+return
+
+goto else(1)
+label if(1)
+label else(1)
+push local 0
+push constant 129
+eq
+not
+if-goto if(2)
+push local 0
+return
+
+goto else(2)
+label if(2)
+label else(2)
+push local 0
+call Output.printChar 1
+pop temp 0
+push local 0
+return
+
+function Keyboard.readCharWithoutPrinting 2
+call Keyboard.keyPressed 0
+pop local 1
+label while(3)
+push local 1
+push constant 0
+eq
+not
+if-goto whileif(3)
+call Keyboard.keyPressed 0
+pop local 1
+goto while(3)
+label whileif(3)
+push local 1
+pop local 0
+label while(4)
+push local 1
+push constant 0
+eq
+not
+not
+if-goto whileif(4)
+call Keyboard.keyPressed 0
+pop local 1
+goto while(4)
+label whileif(4)
+push local 0
+return
+
+function Keyboard.readLine 6
+push argument 0
+call Output.printString 1
+pop temp 0
+call Linked_List.new 0
+pop local 5
+push constant 0
+pop local 2
+push constant 0
+pop local 0
+push constant 0
+pop local 3
+label while(5)
+push local 0
+push constant 0
+eq
+not
+if-goto whileif(5)
+call Keyboard.readChar 0
+pop local 1
+push local 1
+push constant 128
+eq
+not
+if-goto if(3)
+call Output.println 0
+pop temp 0
+push local 3
+push constant 0
+eq
+not
+if-goto if(4)
+push constant 0
+return
+
+goto else(3)
+label if(4)
+label else(3)
+push local 5
+call Linked_List.ChangetoString 1
+pop local 4
+push local 5
+call Linked_List.dispose 1
+pop temp 0
+push local 4
+return
+
+goto else(4)
+label if(3)
+label else(4)
+push local 1
+push constant 129
+eq
+not
+if-goto if(5)
+push local 2
+push constant 0
+eq
+not
+not
+if-goto if(6)
+call Output.backSpace 0
+pop temp 0
+push local 5
+call Linked_List.pop 1
+pop temp 0
+push local 2
+push constant 1
+sub
+pop local 2
+goto else(5)
+label if(6)
+label else(5)
+goto else(6)
+label if(5)
+label else(6)
+push local 1
+push constant 129
+eq
+not
+not
+if-goto if(7)
+push local 5
+push local 1
+call Linked_List.insert 2
+pop temp 0
+push local 2
+push constant 1
+add
+pop local 2
+push constant 1
+pop local 3
+goto else(7)
+label if(7)
+label else(7)
+goto while(5)
+label whileif(5)
+push constant 0
+return
+
+function Keyboard.readInt 7
+push argument 0
+call Output.printString 1
+pop temp 0
+call Linked_List.new 0
+pop local 6
+push constant 0
+pop local 0
+push constant 0
+pop local 2
+push constant 0
+pop local 3
+push constant 0
+pop local 4
+label while(6)
+push local 0
+push constant 0
+eq
+not
+if-goto whileif(6)
+call Keyboard.readCharWithoutPrinting 0
+pop local 1
+push local 1
+push constant 45
+eq
+not
+if-goto if(8)
+push local 6
+push local 1
+call Linked_List.insert 2
+pop temp 0
+push local 1
+call Output.printChar 1
+pop temp 0
+goto else(8)
+label if(8)
+label else(8)
+push local 1
+push constant 128
+eq
+not
+if-goto if(9)
+call Output.println 0
+pop temp 0
+push local 4
+push constant 0
+eq
+not
+if-goto if(10)
+push constant 0
+return
+
+goto else(9)
+label if(10)
+label else(9)
+push local 6
+call Linked_List.ChangetoString 1
+pop local 5
+push local 6
+call Linked_List.dispose 1
+pop temp 0
+push local 5
+call String.intValue 1
+return
+
+goto else(10)
+label if(9)
+label else(10)
+push local 1
+push constant 129
+eq
+not
+if-goto if(11)
+push local 3
+push constant 0
+eq
+not
+not
+if-goto if(12)
+call Output.backSpace 0
+pop temp 0
+push local 6
+call Linked_List.pop 1
+pop temp 0
+push local 3
+push constant 1
+sub
+pop local 3
+goto else(11)
+label if(12)
+label else(11)
+goto else(12)
+label if(11)
+label else(12)
+push local 1
+push constant 47
+gt
+push local 1
+push constant 58
+lt
+and
+not
+if-goto if(13)
+push local 1
+call Output.printChar 1
+pop temp 0
+push constant 1
+pop local 2
+goto else(13)
+label if(13)
+label else(13)
+push local 1
+push constant 129
+eq
+not
+push local 2
+push constant 1
+eq
+and
+not
+if-goto if(14)
+push local 6
+push local 1
+call Linked_List.insert 2
+pop temp 0
+push constant 0
+pop local 2
+push local 3
+push constant 1
+add
+pop local 3
+push constant 1
+pop local 4
+goto else(14)
+label if(14)
+label else(14)
+goto while(6)
+label whileif(6)
+push constant 0
+return
+

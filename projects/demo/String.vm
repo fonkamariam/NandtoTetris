@@ -1,0 +1,391 @@
+function String.new 0
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+push constant 0
+eq
+not
+if-goto if(1)
+push constant 0
+pop this 0
+push constant 0
+pop this 1
+push argument 0
+pop this 2
+push constant 0
+pop static 0
+push constant 0
+pop static 1
+push constant 0
+pop static 2
+push pointer 0
+return
+
+goto else(1)
+label if(1)
+label else(1)
+push argument 0
+call Memory.alloc 1
+pop this 0
+push constant 0
+pop this 1
+push argument 0
+pop this 2
+push constant 0
+pop static 0
+push constant 0
+pop static 1
+push constant 0
+pop static 2
+push pointer 0
+return
+
+function String.dispose 1
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.peek 1
+pop local 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push this 2
+push constant 0
+eq
+not
+not
+if-goto if(2)
+push local 0
+call Memory.deAlloc 1
+pop temp 0
+goto else(2)
+label if(2)
+label else(2)
+push constant 0
+return
+
+pop temp 0
+function String.length 0
+push argument 0
+pop pointer 0
+push this 1
+return
+
+pop temp 0
+function String.charAt 0
+push argument 0
+pop pointer 0
+push argument 1
+push this 2
+lt
+not
+if-goto if(3)
+push this 0
+push argument 1
+add
+pop pointer 1
+push that 0
+return
+
+goto else(3)
+label if(3)
+push constant 0
+return
+
+label else(3)
+function String.setCharAt 0
+push argument 0
+pop pointer 0
+push argument 1
+push this 2
+gt
+not
+if-goto if(4)
+push constant 0
+return
+
+goto else(4)
+label if(4)
+label else(4)
+push this 0
+push argument 1
+add
+push argument 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+
+pop temp 0
+function String.appendChar 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+add
+push this 2
+gt
+not
+if-goto if(5)
+push constant 0
+return
+
+goto else(5)
+label if(5)
+label else(5)
+push this 0
+push this 1
+add
+push argument 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 1
+push constant 1
+add
+pop this 1
+push pointer 0
+return
+
+function String.eraseLastChar 0
+push argument 0
+pop pointer 0
+push this 1
+push this 2
+gt
+not
+if-goto if(6)
+push constant 0
+return
+
+goto else(6)
+label if(6)
+label else(6)
+push this 0
+push this 1
+push constant 1
+sub
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 1
+push constant 1
+sub
+pop this 1
+push constant 0
+return
+
+pop temp 0
+function String.intValue 5
+push argument 0
+pop pointer 0
+push static 0
+pop static 1
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+push constant 1
+pop local 3
+push constant 0
+pop local 4
+push this 0
+push constant 0
+add
+pop pointer 1
+push that 0
+push constant 45
+eq
+not
+if-goto if(7)
+push constant 1
+pop local 4
+push this 1
+push constant 1
+sub
+pop this 1
+push static 1
+push constant 1
+add
+pop static 1
+goto else(7)
+label if(7)
+label else(7)
+label while(1)
+push local 0
+push this 1
+push constant 1
+sub
+lt
+not
+if-goto whileif(1)
+push local 3
+push constant 10
+call Math.multiply 2
+pop local 3
+push local 0
+push constant 1
+add
+pop local 0
+goto while(1)
+label whileif(1)
+push constant 0
+pop local 0
+label while(2)
+push local 0
+push this 1
+lt
+not
+if-goto whileif(2)
+push this 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 48
+sub
+push local 3
+call Math.multiply 2
+pop local 2
+push local 1
+push local 2
+add
+pop local 1
+push static 1
+push constant 1
+add
+pop static 1
+push local 3
+push constant 10
+call Math.divide 2
+pop local 3
+push local 0
+push constant 1
+add
+pop local 0
+goto while(2)
+label whileif(2)
+push local 4
+push constant 1
+eq
+not
+if-goto if(8)
+push this 1
+push constant 1
+add
+pop this 1
+push local 1
+neg
+return
+
+goto else(8)
+label if(8)
+label else(8)
+push local 1
+return
+
+pop temp 0
+function String.setInt 3
+push argument 0
+pop pointer 0
+push static 2
+push constant 0
+eq
+not
+if-goto if(9)
+push static 0
+pop static 1
+goto else(9)
+label if(9)
+label else(9)
+push argument 1
+push constant 0
+lt
+not
+if-goto if(10)
+push argument 1
+neg
+pop argument 1
+push this 0
+push static 1
+add
+push constant 45
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push constant 1
+neg
+pop static 2
+goto else(10)
+label if(10)
+label else(10)
+push argument 1
+push constant 0
+eq
+not
+if-goto if(11)
+push constant 0
+pop static 2
+push constant 0
+return
+
+goto else(11)
+label if(11)
+label else(11)
+push argument 1
+push constant 10
+call Math.Mod 2
+pop local 2
+push argument 1
+push local 2
+sub
+push constant 10
+call Math.divide 2
+pop local 1
+push local 1
+call String.setInt 1
+pop temp 0
+push this 0
+push static 1
+add
+push constant 48
+push local 2
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push static 1
+push constant 1
+add
+pop static 1
+push static 1
+pop this 1
+push constant 0
+return
+
+pop temp 0
+function String.newLine 0
+push constant 128
+return
+
+function String.backSpace 0
+push constant 129
+return
+
+function String.doubleQuote 0
+push constant 34
+return
+

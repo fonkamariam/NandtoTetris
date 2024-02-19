@@ -1,0 +1,30 @@
+call function Math.hey 0
+function Math.hey 3
+push constant 0
+pop local 0
+push constant 10
+pop local 1
+push local 1
+push constant 100
+gt
+not
+if-goto if(1)
+push local 0
+push constant 0
+gt
+not
+if-goto if(2)
+push constant 1
+pop local 2
+goto else(1)
+label if(2)
+push constant 2
+pop local 2
+label else(1)
+goto else(2)
+label if(1)
+push constant 3
+pop local 2
+label else(2)
+push constant 0
+return

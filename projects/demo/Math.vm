@@ -1,0 +1,875 @@
+function Math.init 2
+push constant 1
+pop local 0
+push constant 0
+pop local 1
+push constant 16
+call Array.new 1
+pop static 0
+label while(1)
+push local 1
+push constant 16
+lt
+not
+if-goto whileif(1)
+push static 0
+push local 1
+add
+push local 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push local 0
+add
+pop local 0
+push local 1
+push constant 1
+add
+pop local 1
+goto while(1)
+label whileif(1)
+push constant 0
+return
+
+function Math.Mod 2
+push constant 0
+pop local 0
+push argument 0
+pop local 1
+label while(2)
+push local 1
+push argument 1
+gt
+push local 1
+push argument 1
+eq
+or
+not
+if-goto whileif(2)
+push local 1
+push argument 1
+sub
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto while(2)
+label whileif(2)
+push local 1
+return
+
+function Math.abs 0
+push argument 0
+push constant 0
+lt
+not
+if-goto if(1)
+push argument 0
+neg
+return
+
+goto else(1)
+label if(1)
+push argument 0
+return
+
+label else(1)
+function Math.multiplyOld 3
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+lt
+and
+not
+if-goto if(2)
+push constant 1
+pop local 2
+goto else(2)
+label if(2)
+label else(2)
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+gt
+and
+not
+if-goto if(3)
+push constant 1
+neg
+pop local 2
+goto else(3)
+label if(3)
+label else(3)
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+lt
+and
+not
+if-goto if(4)
+push constant 1
+neg
+pop local 2
+goto else(4)
+label if(4)
+label else(4)
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+gt
+and
+not
+if-goto if(5)
+push constant 1
+pop local 2
+goto else(5)
+label if(5)
+label else(5)
+push argument 0
+call Math.abs 1
+pop argument 0
+push argument 1
+call Math.abs 1
+pop argument 1
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+label while(3)
+push local 0
+push argument 1
+lt
+not
+if-goto whileif(3)
+push local 1
+push argument 0
+add
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto while(3)
+label whileif(3)
+push local 2
+push constant 1
+eq
+not
+if-goto if(6)
+push local 1
+return
+
+goto else(6)
+label if(6)
+push local 1
+neg
+return
+
+label else(6)
+function Math.multiply 5
+push argument 0
+push constant 0
+eq
+push argument 1
+push constant 0
+eq
+or
+not
+if-goto if(7)
+push constant 0
+return
+
+goto else(7)
+label if(7)
+label else(7)
+push argument 0
+push constant 1
+eq
+not
+if-goto if(8)
+push argument 1
+return
+
+goto else(8)
+label if(8)
+label else(8)
+push argument 1
+push constant 1
+eq
+not
+if-goto if(9)
+push argument 0
+return
+
+goto else(9)
+label if(9)
+label else(9)
+push argument 0
+push constant 1
+neg
+eq
+not
+if-goto if(10)
+push argument 1
+neg
+return
+
+goto else(10)
+label if(10)
+label else(10)
+push argument 1
+push constant 1
+neg
+eq
+not
+if-goto if(11)
+push argument 0
+neg
+return
+
+goto else(11)
+label if(11)
+label else(11)
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+lt
+and
+not
+if-goto if(12)
+push constant 1
+pop local 2
+goto else(12)
+label if(12)
+label else(12)
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+gt
+and
+not
+if-goto if(13)
+push constant 1
+neg
+pop local 2
+goto else(13)
+label if(13)
+label else(13)
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+lt
+and
+not
+if-goto if(14)
+push constant 1
+neg
+pop local 2
+goto else(14)
+label if(14)
+label else(14)
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+gt
+and
+not
+if-goto if(15)
+push constant 1
+pop local 2
+goto else(15)
+label if(15)
+label else(15)
+push argument 0
+call Math.abs 1
+pop argument 0
+push argument 1
+call Math.abs 1
+pop argument 1
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+push argument 0
+pop local 3
+label while(4)
+push local 0
+push constant 16
+lt
+not
+if-goto whileif(4)
+push argument 1
+push static 0
+push local 0
+add
+pop pointer 1
+push that 0
+and
+pop local 4
+push local 4
+push constant 0
+eq
+not
+not
+if-goto if(16)
+push local 1
+push local 3
+add
+pop local 1
+goto else(16)
+label if(16)
+label else(16)
+push local 3
+push local 3
+add
+pop local 3
+push local 0
+push constant 1
+add
+pop local 0
+goto while(4)
+label whileif(4)
+push local 2
+push constant 1
+eq
+not
+if-goto if(17)
+push local 1
+return
+
+goto else(17)
+label if(17)
+push local 1
+neg
+return
+
+label else(17)
+function Math.divide_help 2
+push argument 0
+call Math.abs 1
+pop argument 0
+push argument 1
+call Math.abs 1
+pop argument 1
+push argument 1
+push argument 0
+gt
+push argument 1
+push constant 0
+lt
+or
+not
+if-goto if(18)
+push constant 0
+return
+
+goto else(18)
+label if(18)
+label else(18)
+push argument 0
+push constant 2
+push argument 1
+call Math.multiply 2
+call Math.divide_help 2
+pop local 0
+push argument 0
+push constant 2
+push local 0
+call Math.multiply 2
+push argument 1
+call Math.multiply 2
+sub
+push argument 1
+lt
+not
+if-goto if(19)
+push constant 2
+push local 0
+call Math.multiply 2
+return
+
+goto else(19)
+label if(19)
+push constant 2
+push local 0
+call Math.multiply 2
+push constant 1
+add
+return
+
+label else(19)
+function Math.divide 3
+push argument 1
+push constant 0
+eq
+not
+if-goto if(20)
+push constant 0
+return
+
+goto else(20)
+label if(20)
+label else(20)
+push argument 0
+push constant 0
+eq
+not
+if-goto if(21)
+push constant 0
+return
+
+goto else(21)
+label if(21)
+label else(21)
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+lt
+and
+not
+if-goto if(22)
+push constant 1
+pop local 2
+goto else(22)
+label if(22)
+label else(22)
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+gt
+and
+not
+if-goto if(23)
+push constant 1
+neg
+pop local 2
+goto else(23)
+label if(23)
+label else(23)
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+lt
+and
+not
+if-goto if(24)
+push constant 1
+neg
+pop local 2
+goto else(24)
+label if(24)
+label else(24)
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+gt
+and
+not
+if-goto if(25)
+push constant 1
+pop local 2
+goto else(25)
+label if(25)
+label else(25)
+push argument 0
+call Math.abs 1
+pop argument 0
+push argument 1
+call Math.abs 1
+pop argument 1
+push constant 0
+pop local 0
+push argument 0
+pop local 1
+label while(5)
+push local 1
+push argument 1
+gt
+push local 1
+push argument 1
+eq
+or
+not
+if-goto whileif(5)
+push local 1
+push argument 1
+sub
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto while(5)
+label whileif(5)
+push local 0
+push local 2
+call Math.multiply 2
+return
+
+function Math.max 0
+push argument 0
+push constant 0
+lt
+push argument 1
+and
+push constant 0
+lt
+not
+if-goto if(26)
+push argument 0
+push argument 1
+sub
+push constant 0
+gt
+not
+if-goto if(27)
+push argument 0
+return
+
+goto else(26)
+label if(27)
+push argument 1
+return
+
+label else(26)
+goto else(27)
+label if(26)
+label else(27)
+push argument 0
+push constant 0
+lt
+push argument 1
+and
+push constant 0
+gt
+not
+if-goto if(28)
+push argument 1
+return
+
+goto else(28)
+label if(28)
+label else(28)
+push argument 0
+push constant 0
+gt
+push argument 1
+and
+push constant 0
+lt
+not
+if-goto if(29)
+push argument 0
+return
+
+goto else(29)
+label if(29)
+label else(29)
+push argument 0
+push constant 0
+gt
+push argument 1
+and
+push constant 0
+gt
+not
+if-goto if(30)
+push argument 0
+push argument 1
+sub
+push constant 0
+gt
+not
+if-goto if(31)
+push argument 0
+return
+
+goto else(30)
+label if(31)
+push argument 1
+return
+
+label else(30)
+goto else(31)
+label if(30)
+label else(31)
+function Math.min 0
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+lt
+and
+not
+if-goto if(32)
+push argument 0
+push argument 1
+sub
+push constant 0
+lt
+not
+if-goto if(33)
+push argument 0
+return
+
+goto else(32)
+label if(33)
+push argument 1
+return
+
+label else(32)
+goto else(33)
+label if(32)
+label else(33)
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+gt
+and
+not
+if-goto if(34)
+push argument 0
+return
+
+goto else(34)
+label if(34)
+label else(34)
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+lt
+and
+not
+if-goto if(35)
+push argument 1
+return
+
+goto else(35)
+label if(35)
+label else(35)
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+gt
+and
+not
+if-goto if(36)
+push argument 0
+push argument 1
+sub
+push constant 0
+lt
+not
+if-goto if(37)
+push argument 0
+return
+
+goto else(36)
+label if(37)
+push argument 1
+return
+
+label else(36)
+goto else(37)
+label if(36)
+label else(37)
+function Math.sqrt 5
+push argument 0
+push constant 1
+neg
+lt
+not
+if-goto if(38)
+push constant 0
+return
+
+goto else(38)
+label if(38)
+label else(38)
+push constant 0
+pop local 0
+push argument 0
+push constant 2
+call Math.divide 2
+pop local 1
+push argument 0
+push constant 32767
+eq
+not
+if-goto if(39)
+push constant 181
+return
+
+goto else(39)
+label if(39)
+label else(39)
+push local 1
+push constant 364
+gt
+not
+if-goto if(40)
+push constant 363
+pop local 1
+goto else(40)
+label if(40)
+label else(40)
+label while(6)
+push local 0
+push local 1
+lt
+push local 0
+push local 1
+eq
+or
+not
+if-goto whileif(6)
+push local 0
+push local 1
+add
+push constant 2
+call Math.divide 2
+pop local 2
+push local 2
+push local 2
+call Math.multiply 2
+pop local 3
+push local 2
+push constant 181
+eq
+not
+if-goto if(41)
+push constant 32767
+pop local 4
+goto else(41)
+label if(41)
+push local 3
+push local 2
+add
+push local 2
+add
+push constant 1
+add
+pop local 4
+label else(41)
+push local 3
+push argument 0
+lt
+push local 3
+push argument 0
+eq
+or
+push local 4
+push argument 0
+gt
+and
+not
+if-goto if(42)
+push local 2
+return
+
+goto else(42)
+label if(42)
+label else(42)
+push local 3
+push argument 0
+gt
+not
+if-goto if(43)
+push local 2
+push constant 1
+sub
+pop local 1
+goto else(43)
+label if(43)
+label else(43)
+push local 3
+push argument 0
+lt
+not
+if-goto if(44)
+push local 2
+push constant 1
+add
+pop local 0
+goto else(44)
+label if(44)
+label else(44)
+push local 3
+push argument 0
+eq
+not
+if-goto if(45)
+push local 2
+return
+
+goto else(45)
+label if(45)
+label else(45)
+goto while(6)
+label whileif(6)
+push local 2
+return
+
+function Math.bit 0
+push argument 0
+push static 0
+push argument 1
+add
+pop pointer 1
+push that 0
+and
+push constant 0
+eq
+not
+if-goto if(46)
+push constant 1
+return
+
+goto else(46)
+label if(46)
+push constant 0
+return
+
+label else(46)
+function Math.getPower 0
+push static 0
+push argument 0
+add
+pop pointer 1
+push that 0
+return
+

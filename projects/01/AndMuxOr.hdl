@@ -1,0 +1,23 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/And.hdl
+
+/**
+ * And gate: 
+ * out = 1 if (a == 1 and b == 1)
+ *       0 otherwise
+ */
+
+CHIP AndMuxOr {
+    IN a, b, sel;
+    OUT out;
+
+    PARTS:
+    And(a=a, b=b, out=aAndb);
+    Or(a=a, b=b, out=aOrb);
+    Not(in=sel, out=Nsel);
+    And(a=aAndb, b=Nsel, out=w1);
+    And(a=aOrb, b=sel, out=w2);
+    Or(a=w1, b=w2, out=out);
+}
